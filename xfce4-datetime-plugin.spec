@@ -1,6 +1,6 @@
 %define		_xfce 4.1.99.2
-Summary:	A date and time plugin for the XFce4 panel
-Summary(pl):	Wtyczka panelu XFce4 pokazuj±ca datê i czas
+Summary:	A date and time plugin for the Xfce panel
+Summary(pl):	Wtyczka panelu Xfce pokazuj±ca datê i czas
 Name:		xfce4-datetime-plugin
 Version:	0.3.1
 Release:	3
@@ -14,11 +14,11 @@ Requires:	xfce4-panel >= %{_xfce}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-An additional clock for the XFce4 panel which also shows the date,
+An additional clock for the Xfce panel which also shows the date,
 with adjustable font.
 
 %description -l pl
-Wtyczka dla panelu XFce4 wy¶wietlaj±ca datê i czas, wyposa¿ona w
+Wtyczka dla panelu Xfce wy¶wietlaj±ca datê i czas, wyposa¿ona w
 kalendarz.
 
 %prep
