@@ -1,5 +1,5 @@
 Summary:	A date and time plugin for the XFce4 panel
-Summary(pl):	Plugin pokazuj±cy date i czas
+Summary(pl):	Plugin pokazuj±cy datê i czas
 Name:		xfce4-datetime-plugin
 Version:	0.2
 Release:	1
@@ -17,7 +17,8 @@ An additional clock for the XFce4 panel which also shows the date,
 with adjustable font.
 
 %description -l pl
-Plugin dla panelu XFce4 wy¶wietlaj±cy date i czas, wyposa¿ony w kalendarz.
+Plugin dla panelu XFce4 wy¶wietlaj±cy datê i czas, wyposa¿ony w
+kalendarz.
 
 %prep
 %setup -q
