@@ -5,10 +5,11 @@ Name:		xfce4-datetime-plugin
 Version:	0.3.1
 Release:	4
 License:	GPL
+Group:		X11/Applications
 Source0:	http://download.berlios.de/xfce-goodies/%{name}-%{version}.tar.gz
 # Source0-md5:	92b7ebee7f0c8074f5cf590f77f676f2
-Group:		X11/Applications
 URL:		http://xfce-goodies.berlios.de/
+BuildRequires:	automake
 BuildRequires:	xfce4-panel-devel >= %{_xfce}
 Requires:	xfce4-panel >= %{_xfce}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
