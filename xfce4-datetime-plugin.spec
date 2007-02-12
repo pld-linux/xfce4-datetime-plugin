@@ -1,5 +1,5 @@
 Summary:	A date and time plugin for the Xfce panel
-Summary(pl.UTF-8):   Wtyczka panelu Xfce pokazująca datę i czas
+Summary(pl.UTF-8):	Wtyczka panelu Xfce pokazująca datę i czas
 Name:		xfce4-datetime-plugin
 Version:	0.4.1
 Release:	1
