@@ -1,12 +1,12 @@
 Summary:	A date and time plugin for the Xfce panel
 Summary(pl):	Wtyczka panelu Xfce pokazuj±ca datê i czas
 Name:		xfce4-datetime-plugin
-Version:	0.4.1
+Version:	0.5.0
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	http://goodies.xfce.org/releases/xfce4-datetime-plugin/%{name}-%{version}.tar.gz
-# Source0-md5:	b21889b5c220f2dac8abdb63a6ed253d
+# Source0-md5:	0aa1c85861a0ab8fc7f2d502c94de289
 URL:		http://goodies.xfce.org/projects/panel-plugins/xfce4-datetime-plugin
 BuildRequires:	autoconf
 BuildRequires:	automake
