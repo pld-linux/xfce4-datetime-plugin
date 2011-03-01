@@ -1,0 +1,151 @@
+diff -ur xfce4-datetime-plugin-0.6.1-orig/config.h.in xfce4-datetime-plugin-0.6.1/config.h.in
+--- xfce4-datetime-plugin-0.6.1-orig/config.h.in	2008-11-19 08:10:47.000000000 +0100
++++ xfce4-datetime-plugin-0.6.1/config.h.in	2011-03-01 12:45:13.000000000 +0100
+@@ -57,6 +57,10 @@
+ /* Define to 1 if you have the <unistd.h> header file. */
+ #undef HAVE_UNISTD_H
+ 
++/* Define to the sub-directory in which libtool stores uninstalled libraries.
++   */
++#undef LT_OBJDIR
++
+ /* Name of package */
+ #undef PACKAGE
+ 
+@@ -72,21 +76,39 @@
+ /* Define to the one symbol short name of this package. */
+ #undef PACKAGE_TARNAME
+ 
++/* Define to the home page for this package. */
++#undef PACKAGE_URL
++
+ /* Define to the version of this package. */
+ #undef PACKAGE_VERSION
+ 
+ /* Define to 1 if you have the ANSI C header files. */
+ #undef STDC_HEADERS
+ 
+-/* Version number of package */
+-#undef VERSION
+-
+-/* Define to 1 if on AIX 3.
+-   System headers sometimes define this.
+-   We just want to avoid a redefinition error message.  */
++/* Enable extensions on AIX 3, Interix.  */
+ #ifndef _ALL_SOURCE
+ # undef _ALL_SOURCE
+ #endif
++/* Enable GNU extensions on systems that have them.  */
++#ifndef _GNU_SOURCE
++# undef _GNU_SOURCE
++#endif
++/* Enable threading extensions on Solaris.  */
++#ifndef _POSIX_PTHREAD_SEMANTICS
++# undef _POSIX_PTHREAD_SEMANTICS
++#endif
++/* Enable extensions on HP NonStop.  */
++#ifndef _TANDEM_SOURCE
++# undef _TANDEM_SOURCE
++#endif
++/* Enable general extensions on Solaris.  */
++#ifndef __EXTENSIONS__
++# undef __EXTENSIONS__
++#endif
++
++
++/* Version number of package */
++#undef VERSION
+ 
+ /* Define to 1 if on MINIX. */
+ #undef _MINIX
+diff -ur xfce4-datetime-plugin-0.6.1-orig/configure.in xfce4-datetime-plugin-0.6.1/configure.in
+--- xfce4-datetime-plugin-0.6.1-orig/configure.in	2008-11-19 08:10:31.000000000 +0100
++++ xfce4-datetime-plugin-0.6.1/configure.in	2011-03-01 12:45:09.698889237 +0100
+@@ -31,7 +31,7 @@
+ 
+ dnl Check for required packages
+ XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.6.0])
+-XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.3.99.2])
++XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-1], [4.8.0])
+ XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.3.99.2])
+ XDT_CHECK_PACKAGE([LIBXFCE4PANEL],[libxfce4panel-1.0],[4.3.99.2])
+ 
+diff -ur xfce4-datetime-plugin-0.6.1-orig/panel-plugin/datetime.c xfce4-datetime-plugin-0.6.1/panel-plugin/datetime.c
+--- xfce4-datetime-plugin-0.6.1-orig/panel-plugin/datetime.c	2008-10-25 19:07:51.000000000 +0200
++++ xfce4-datetime-plugin-0.6.1/panel-plugin/datetime.c	2011-03-01 12:45:09.698889237 +0100
+@@ -28,10 +28,9 @@
+ #include <string.h>
+ 
+ /* xfce includes */
+-#include <libxfcegui4/libxfcegui4.h>
++#include <libxfce4ui/libxfce4ui.h>
+ #include <libxfce4util/libxfce4util.h>
+-#include <libxfce4panel/xfce-panel-plugin.h>
+-#include <libxfce4panel/xfce-panel-convenience.h>
++#include <libxfce4panel/libxfce4panel.h>
+ 
+ #include "datetime.h"
+ #include "datetime-dialog.h"
+diff -ur xfce4-datetime-plugin-0.6.1-orig/panel-plugin/datetime-dialog.c xfce4-datetime-plugin-0.6.1/panel-plugin/datetime-dialog.c
+--- xfce4-datetime-plugin-0.6.1-orig/panel-plugin/datetime-dialog.c	2008-11-19 08:06:14.000000000 +0100
++++ xfce4-datetime-plugin-0.6.1/panel-plugin/datetime-dialog.c	2011-03-01 12:47:56.425889238 +0100
+@@ -28,9 +28,9 @@
+ #include <string.h>
+ 
+ /* xfce includes */
+-#include <libxfcegui4/libxfcegui4.h>
++#include <libxfce4ui/libxfce4ui.h>
+ #include <libxfce4util/libxfce4util.h>
+-#include <libxfce4panel/xfce-panel-plugin.h>
++#include <libxfce4panel/libxfce4panel.h>
+ 
+ #include "datetime.h"
+ #include "datetime-dialog.h"
+@@ -388,7 +388,7 @@
+   /*
+    * layout frame
+    */
+-  frame = xfce_create_framebox(_("Layout"), &bin);
++  frame = xfce_gtk_frame_box_new(_("Layout"), &bin);
+   gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dlg)->vbox), frame,
+       FALSE, FALSE, 0);
+   gtk_container_set_border_width(GTK_CONTAINER(frame), 6);
+@@ -422,7 +422,7 @@
+   /*
+    * Date frame
+    */
+-  datetime->date_frame = xfce_create_framebox(_("Date"), &bin);
++  datetime->date_frame = xfce_gtk_frame_box_new(_("Date"), &bin);
+   gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dlg)->vbox), datetime->date_frame,
+       FALSE, FALSE, 0);
+   gtk_container_set_border_width(GTK_CONTAINER(datetime->date_frame), 6);
+@@ -525,7 +525,7 @@
+   /*
+    * time frame
+    */
+-  datetime->time_frame = xfce_create_framebox(_("Time"), &bin);
++  datetime->time_frame = xfce_gtk_frame_box_new(_("Time"), &bin);
+   gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dlg)->vbox), datetime->time_frame,
+       FALSE, FALSE, 0);
+   gtk_container_set_border_width(GTK_CONTAINER(datetime->time_frame), 6);
+diff -ur xfce4-datetime-plugin-0.6.1-orig/panel-plugin/Makefile.am xfce4-datetime-plugin-0.6.1/panel-plugin/Makefile.am
+--- xfce4-datetime-plugin-0.6.1-orig/panel-plugin/Makefile.am	2008-04-21 06:21:45.000000000 +0200
++++ xfce4-datetime-plugin-0.6.1/panel-plugin/Makefile.am	2011-03-01 12:45:09.703889237 +0100
+@@ -14,7 +14,7 @@
+ 	-DLOCALEDIR=\"$(localedir)\"		\
+ 	$(GTK_CFLAGS)				\
+ 	$(LIBXFCE4PANEL_CFLAGS)			\
+-	$(LIBXFCEGUI4_CFLAGS)			\
++	$(LIBXFCE4UI_CFLAGS)			\
+ 	$(LIBXFCE4UTIL_CFLAGS)
+ 
+ libdatetime_la_LDFLAGS = 			\
+@@ -29,7 +29,7 @@
+ libdatetime_la_LIBADD = 			\
+ 	$(GTK_LIBS)				\
+ 	$(LIBXFCE4PANEL_LIBS)			\
+-	$(LIBXFCEGUI4_LIBS)			\
++	$(LIBXFCE4UI_LIBS)			\
+ 	$(LIBXFCE4UTIL_LIBS)
+ 
+ desktopdir = $(datadir)/xfce4/panel-plugins
