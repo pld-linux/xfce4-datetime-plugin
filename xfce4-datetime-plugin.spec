@@ -1,19 +1,14 @@
-#
-# TODO:
-#	- fix after autoconf:
-#	grep: po/Makefile.in: No such file or directory
-#	config.status: error: po/Makefile.in.in was not created by intltoolize.
-#
 Summary:	A date and time plugin for the Xfce panel
 Summary(pl.UTF-8):	Wtyczka panelu Xfce pokazująca datę i czas
 Name:		xfce4-datetime-plugin
 Version:	0.6.1
-Release:	4
+Release:	5
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://goodies.xfce.org/releases/xfce4-datetime-plugin/%{name}-%{version}.tar.bz2
 # Source0-md5:	e82f51ff0e75a63e5cbd139e43e094f9
 Patch0:		%{name}-ui.patch
+Patch1:		ac-fix.patch
 URL:		http://goodies.xfce.org/projects/panel-plugins/xfce4-datetime-plugin
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -35,15 +30,16 @@ kalendarz.
 
 %prep
 %setup -q
-#%patch0 -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
-#{__intltoolize}
-#{__libtoolize}
-#{__aclocal}
-#{__autoconf}
-#{__autoheader}
-#{__automake}
+%{__intltoolize}
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
 	--disable-static
 %{__make}
