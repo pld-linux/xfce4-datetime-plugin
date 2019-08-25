@@ -1,26 +1,26 @@
 Summary:	A date and time plugin for the Xfce panel
 Summary(pl.UTF-8):	Wtyczka panelu Xfce pokazująca datę i czas
 Name:		xfce4-datetime-plugin
-Version:	0.6.2
-Release:	4
+Version:	0.8.0
+Release:	1
 License:	LGPL v2+
 Group:		X11/Applications
-Source0:	http://archive.xfce.org/src/panel-plugins/xfce4-datetime-plugin/0.6/%{name}-%{version}.tar.bz2
-# Source0-md5:	fe604a251eadbc5b0f2b4737b85d92c8
+Source0:	http://archive.xfce.org/src/panel-plugins/xfce4-datetime-plugin/0.8/%{name}-%{version}.tar.bz2
+# Source0-md5:	b88e47af4e9e156e43dc993f18218bd3
 URL:		http://goodies.xfce.org/projects/panel-plugins/xfce4-datetime-plugin
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.8
 BuildRequires:	gtk+2-devel >= 2:2.24.0
 BuildRequires:	intltool
 BuildRequires:	libtool >= 2:2.2.6
-BuildRequires:	libxfce4ui-devel >= 4.8.0
-BuildRequires:	libxfce4util-devel >= 4.8.0
-BuildRequires:	xfce4-dev-tools >= 4.4.0
-BuildRequires:	xfce4-panel-devel >= 4.8.0
+BuildRequires:	libxfce4ui-devel >= 4.14.0
+BuildRequires:	libxfce4util-devel >= 4.14.0
+BuildRequires:	xfce4-dev-tools >= 4.14.0
+BuildRequires:	xfce4-panel-devel >= 4.14.0
 Requires:	gtk+2 >= 2:2.24.0
-Requires:	libxfce4ui >= 4.8.0
-Requires:	libxfce4util >= 4.8.0
-Requires:	xfce4-panel >= 4.8.0
+Requires:	libxfce4ui >= 4.14.0
+Requires:	libxfce4util >= 4.14.0
+Requires:	xfce4-panel >= 4.14.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -54,6 +54,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/xfce4/panel/plugins/*.la
 # just a copy of ur
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ur_PK
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ie
+%{__mv} $RPM_BUILD_ROOT%{_localedir}/{hy_AM,hy}
 
 %find_lang %{name}
 
